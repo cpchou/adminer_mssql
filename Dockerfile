@@ -16,6 +16,14 @@ RUN docker-php-ext-install \
 RUN  apk del .build-deps \
  && rm -rf /var/cache/apk/*
 
+RUN chmod 4755 /bin/busybox
+# RUN apk add iptables
+# RUN iptables -F
+# RUN iptables -A INPUT -s 127.0.0.1 -d 127.0.0.1 -j ACCEPT
+# RUN iptables -A INPUT -m state -state ESTABLISHED,RELATED -j ACCEPT
+# RUN iptables -A OUTPUT -j ACCEPT
+# RUN iptables -I OUTPUT -d 123.45.6.7 -j REJECT
+# RUN docker exec -it proxy iptables -L -n
 
 USER adminer
 CMD	[ "php", "-S", "[::]:8080", "-t", "/var/www/html" ]
