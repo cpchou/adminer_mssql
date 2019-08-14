@@ -25,6 +25,8 @@ RUN chmod 4755 /bin/busybox
 # RUN iptables -I OUTPUT -d 123.45.6.7 -j REJECT
 # RUN docker exec -it proxy iptables -L -n
 
+RUN sed -i 's/dblib:charset=utf8;/dblib:version=7.0;charset=utf8;/g' /var/www/html/adminer.php
+
 USER adminer
 CMD	[ "php", "-S", "[::]:8080", "-t", "/var/www/html" ]
 EXPOSE 8080
